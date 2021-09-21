@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath Fund_Shinner Fund_Shinner.wsgi --log-file -
+web: gunicorn --pythonpath shinner shinner.wsgi --log-file -
