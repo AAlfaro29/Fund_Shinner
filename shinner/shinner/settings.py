@@ -31,7 +31,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'projects.apps.ProjectsConfig','rest_framework',
+    'projects.apps.ProjectsConfig',
+    'rest_framework',
+    'rest_framework.authtoken',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,7 +42,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users.apps.UsersConfig',
 ]
-
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+    'rest_framework.authentication.TokenAuthentication',
+    ]
+}
 AUTH_USER_MODEL = 'users.CustomUser'
 
 MIDDLEWARE = [
