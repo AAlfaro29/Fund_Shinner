@@ -55,3 +55,7 @@ class ProjectDetailSerializer(ProjectSerializer):
         instance.save()
         return instance
 
+class ProjectSerializer(serializers.Serializer):
+    categories = serializers.JSONField (default=list)
+    
+
