@@ -3,6 +3,7 @@ from django.db import models
 
 # Create your models here.
 class Project(models.Model):
+    categories = models.JSONField (default=list)
     title = models.CharField(max_length=200)
     description = models.TextField()
     goal = models.IntegerField()
@@ -29,3 +30,6 @@ class Pledge(models.Model):
         on_delete=models.CASCADE,
         related_name='supporter_pledges'
     )
+
+
+    

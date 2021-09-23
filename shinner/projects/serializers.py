@@ -26,6 +26,7 @@ class PledgeDetailSerializer(PledgeSerializer):
 
 
 class ProjectSerializer(serializers.Serializer):
+    categories = serializers.JSONField (default=list)
     id = serializers.ReadOnlyField()
     title = serializers.CharField(max_length=200)
     description = serializers.CharField(max_length=None)
@@ -34,6 +35,18 @@ class ProjectSerializer(serializers.Serializer):
     is_open = serializers.BooleanField()
     date_created = serializers.DateTimeField()
     owner = serializers.ReadOnlyField(source='owner.id')
+    total_pledges = serializers.SerializerMethodField()
+
+    def get_total_pledges(self, project):
+        pledges = Pledge.objects.filter(project=project)
+        total_amount = 0 
+        for pledge in pledges:
+            total_amount += pledge.amount
+
+        return total_amount
+
+        return "total_pledges id: "
+
     # pledges = PledgeSerializer(many=True, read_only=True)
     
 
@@ -55,7 +68,8 @@ class ProjectDetailSerializer(ProjectSerializer):
         instance.save()
         return instance
 
-class ProjectSerializer(serializers.Serializer):
-    categories = serializers.JSONField (default=list)
+
+
+    
     
 
